@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace Zoca.Handlers
 {
+    /// <summary>
+    /// Represents an abstract virtual input handler.
+    /// </summary>
     public abstract class VirtualInputHandler
     {
         public string Name
@@ -17,33 +20,22 @@ namespace Zoca.Handlers
 
         string _name;
 
-        
+        /// <summary>
+        /// Create and try to register itself.
+        /// </summary>
+        /// <param name="name"></param>
         protected VirtualInputHandler(string name)
         {
             _name = name;
-            Debug.Log("Create new handler:" + _name);
+            Debug.Log("Creating new virtual input handler:" + _name);
 
+            // Try register handle
             VirtualInput.RegisterHandler(this);
 
-            //// Check if exists
-            //Debug.Log("Handlers.Count:" + handlers.Count);
-            //VirtualInputHandler handler = handlers.Find(h => h._name.Equals(name));
-
-            //if (handler != null)
-            //{
-            //    Debug.LogErrorFormat("Handler.Name={0} already registred.", name);
-            //    return;
-            //}
-            
-            //handlers.Add(this);
+         
+           
             
         }
-
-
-        //public static VirtualInputHandler GetHandler(string name)
-        //{
-        //    return handlers.Find(h => h._name.Equals(name));
-        //}
 
 
 

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4843722269926870881}
   - component: {fileID: 4843722269926870880}
   - component: {fileID: 4843722269926870883}
+  - component: {fileID: 353930201}
   m_Layer: 5
   m_Name: VirtualJoyistickUI
   m_TagString: Untagged
@@ -100,6 +101,23 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &353930201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4843722269926870882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e43906a45193264898d3ce523f87e71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  horizontalAxisName: Horizontal
+  verticalAxisName: Vertical
+  stick: {fileID: 4843722269990960081}
+  radius: 160
+  resetSpeed: 1
 --- !u!1 &4843722269990960080
 GameObject:
   m_ObjectHideFlags: 0
@@ -112,7 +130,7 @@ GameObject:
   - component: {fileID: 4843722269990960095}
   - component: {fileID: 4843722269990960094}
   m_Layer: 5
-  m_Name: Joystick
+  m_Name: Stick
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -186,7 +204,6 @@ GameObject:
   - component: {fileID: 4843722270192595139}
   - component: {fileID: 4843722270192595150}
   - component: {fileID: 4843722270192595137}
-  - component: {fileID: 4843722270192595136}
   m_Layer: 5
   m_Name: BG
   m_TagString: Untagged
@@ -252,20 +269,3 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &4843722270192595136
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4843722270192595138}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e43906a45193264898d3ce523f87e71, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  horizontalAxisName: Horizontal
-  verticalAxisName: Vertical
-  joystick: {fileID: 4843722269990960081}
-  radius: 160
-  resetSpeed: 1

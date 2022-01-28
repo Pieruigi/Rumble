@@ -6,32 +6,33 @@ using Zoca.Handlers;
 
 namespace Zoca.UI
 {
+    /// <summary>
+    /// A virtual joystick UI implementation
+    /// </summary>
     public class VirtualJoystick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler
     {
         #region private fields
         [SerializeField]
-        string horizontalAxisName;
+        string horizontalAxisName; // Name of the horizontal axis
 
         [SerializeField]
-        string verticalAxisName;
+        string verticalAxisName; // Name of the vertical axis
 
         [SerializeField]
-        RectTransform joystick;
+        RectTransform stick; // The stick
 
         [SerializeField]
-        float radius = 200;
+        float radius = 200; // The movement range
 
         [SerializeField]
         [Range(0,1)]
-        float resetSpeed = 1f;
+        float resetSpeed = 1f; // How fast you want the stick to reset on pointer up
 
         // The handlers
         VirtualAxisHandler horizontalHandler;
         VirtualAxisHandler verticalHandler;
 
-        // Center position
-        Vector2 center;
-        Vector2 position;
+        
         bool isDown = false;
         
 
@@ -44,9 +45,7 @@ namespace Zoca.UI
             horizontalHandler = new VirtualAxisHandler(horizontalAxisName);
             verticalHandler = new VirtualAxisHandler(verticalAxisName);
 
-            // Keep center position
-            center = joystick.anchoredPosition;
-            position = center;
+
         }
 
         // Start is called before the first frame update
@@ -60,46 +59,42 @@ namespace Zoca.UI
         {
             if(!isDown)
             {
-                Debug.Log("Reset");
-                // Reset
-                joystick.anchoredPosition = Vector2.MoveTowards(joystick.anchoredPosition, Vector2.zero, resetSpeed * 10000f * Time.deltaTime);
-                float t = (joystick.anchoredPosition.x / radius + 1f) / 2f;
-                horizontalHandler.SetValue(Mathf.Lerp(-1f, 1f, t));
-                t = (joystick.anchoredPosition.y / radius + 1f) / 2f;
-                verticalHandler.SetValue(Mathf.Lerp(-1f, 1f, t));
+                // Reset the stick
+                stick.anchoredPosition = Vector2.MoveTowards(stick.anchoredPosition, Vector2.zero, resetSpeed * 10000f * Time.deltaTime);
+
+                UpdateAxisValue();
+             
             }
         }
 
-        
+        void UpdateAxisValue()
+        {
+            // Set value
+            float t = (stick.anchoredPosition.x / radius + 1f) / 2f;
+            horizontalHandler.SetValue(Mathf.Lerp(-1f, 1f, t));
+            t = (stick.anchoredPosition.y / radius + 1f) / 2f;
+            verticalHandler.SetValue(Mathf.Lerp(-1f, 1f, t));
+        }
         #endregion
 
         #region event handlers
         public void OnDrag(PointerEventData eventData)
         {
-            Debug.LogFormat("VirtualJoystick - On drag");
-            Debug.LogFormat("VirtualJoystick - On drag, delta:"+ eventData.delta);
+           
+            stick.anchoredPosition += eventData.delta;
+            stick.anchoredPosition = Vector2.ClampMagnitude(stick.anchoredPosition, radius);
 
-            joystick.anchoredPosition += eventData.delta;
-            joystick.anchoredPosition = Vector2.ClampMagnitude(joystick.anchoredPosition, radius);
+            UpdateAxisValue();
 
-            // Set value
-            float t = (joystick.anchoredPosition.x / radius + 1f) / 2f;
-            horizontalHandler.SetValue(Mathf.Lerp(-1f, 1f, t));
-            t = (joystick.anchoredPosition.y / radius + 1f) / 2f;
-            verticalHandler.SetValue(Mathf.Lerp(-1f, 1f, t));
-
-            Debug.LogFormat("Handler - GetValue() - x:{0}, y:{1}", horizontalHandler.GetValue(), verticalHandler.GetValue());
         }
 
         public void OnPointerDown(PointerEventData eventData)
         {
-            Debug.LogFormat("VirtualJoystick - On pointer down");
             isDown = true;
         }
 
         public void OnPointerUp(PointerEventData eventData)
         {
-            Debug.LogFormat("VirtualJoystick - On pointer up");
             isDown = false;
         }
 
