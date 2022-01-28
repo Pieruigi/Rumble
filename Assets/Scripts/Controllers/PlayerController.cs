@@ -38,7 +38,7 @@ namespace Zoca.Controllers
 #if UNITY_EDITOR
             moveInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 #endif
-            moveInput = new Vector2(((VirtualAxisHandler)VirtualAxisHandler.GetHandler("Horizontal")).GetValue(), ((VirtualAxisHandler)VirtualAxisHandler.GetHandler("Vertical")).GetValue());
+            moveInput = new Vector2(VirtualInput.GetAxis("Horizontal").GetValue(), VirtualInput.GetAxis("Vertical").GetValue());
 
             // Calculate torque
             Vector2 targetTorqueDir = moveInput.normalized;
