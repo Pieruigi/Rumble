@@ -50,7 +50,7 @@ namespace Zoca.Controllers
             Vector3 ret = ball.transform.position;
 
             ret.y = height;
-            ret.x = 0;
+            //ret.x = 0;
             ret.z -= distance;
 
             return ret;

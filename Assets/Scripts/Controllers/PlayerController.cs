@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zoca.Handlers;
 
 namespace Zoca.Controllers
 {
@@ -20,6 +21,8 @@ namespace Zoca.Controllers
         Vector3 targetTorque;
         Vector3 torque;
 
+        
+
         private void Awake()
         {
             rb = GetComponent<Rigidbody>();
@@ -35,6 +38,7 @@ namespace Zoca.Controllers
 #if UNITY_EDITOR
             moveInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 #endif
+            moveInput = new Vector2(((VirtualAxisHandler)VirtualAxisHandler.GetHandler("Horizontal")).GetValue(), ((VirtualAxisHandler)VirtualAxisHandler.GetHandler("Vertical")).GetValue());
 
             // Calculate torque
             Vector2 targetTorqueDir = moveInput.normalized;
