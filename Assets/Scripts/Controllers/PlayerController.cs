@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Zoca.Handlers;
+using Zoca.VirtualInputSystem;
 
 namespace Zoca.Controllers
 {
@@ -38,7 +38,7 @@ namespace Zoca.Controllers
 #if UNITY_EDITOR
             moveInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 #endif
-            moveInput = new Vector2(VirtualInput.GetAxis("Horizontal").GetValue(), VirtualInput.GetAxis("Vertical").GetValue());
+            moveInput = new Vector2(VirtualInput.GetAxis("Horizontal"), VirtualInput.GetAxis("Vertical"));
 
             // Calculate torque
             Vector2 targetTorqueDir = moveInput.normalized;

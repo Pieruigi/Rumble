@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using Zoca.Handlers;
+using Zoca.VirtualInputSystem.Handlers;
 
-namespace Zoca.UI
+namespace Zoca.VirtualInputSystem.UI
 {
     /// <summary>
     /// A virtual joystick UI implementation
@@ -22,11 +22,10 @@ namespace Zoca.UI
         RectTransform stick; // The stick
 
         [SerializeField]
-        float radius = 200; // The movement range
+        float moveRange = 200; // The movement range
 
         [SerializeField]
-        [Range(0,1)]
-        float resetSpeed = 1f; // How fast you want the stick to reset on pointer up
+        float resetTime = 0f; // The time it will take to reset ( 0 means immediate )
 
         // The handlers
         VirtualAxisHandler horizontalHandler;
@@ -34,7 +33,7 @@ namespace Zoca.UI
 
         
         bool isDown = false;
-        
+       
 
         #endregion
 
@@ -44,7 +43,7 @@ namespace Zoca.UI
             // Create handlers
             horizontalHandler = new VirtualAxisHandler(horizontalAxisName);
             verticalHandler = new VirtualAxisHandler(verticalAxisName);
-
+   
 
         }
 
@@ -60,7 +59,14 @@ namespace Zoca.UI
             if(!isDown)
             {
                 // Reset the stick
-                stick.anchoredPosition = Vector2.MoveTowards(stick.anchoredPosition, Vector2.zero, resetSpeed * 10000f * Time.deltaTime);
+                if(resetTime > 0)
+                {
+                    stick.anchoredPosition = Vector2.MoveTowards(stick.anchoredPosition, Vector2.zero, 1000f / resetTime * Time.deltaTime);
+                }
+                else
+                {
+                    stick.anchoredPosition = Vector2.zero;
+                }
 
                 UpdateAxisValue();
              
@@ -70,9 +76,9 @@ namespace Zoca.UI
         void UpdateAxisValue()
         {
             // Set value
-            float t = (stick.anchoredPosition.x / radius + 1f) / 2f;
+            float t = (stick.anchoredPosition.x / moveRange + 1f) / 2f;
             horizontalHandler.SetValue(Mathf.Lerp(-1f, 1f, t));
-            t = (stick.anchoredPosition.y / radius + 1f) / 2f;
+            t = (stick.anchoredPosition.y / moveRange + 1f) / 2f;
             verticalHandler.SetValue(Mathf.Lerp(-1f, 1f, t));
         }
         #endregion
@@ -82,7 +88,7 @@ namespace Zoca.UI
         {
            
             stick.anchoredPosition += eventData.delta;
-            stick.anchoredPosition = Vector2.ClampMagnitude(stick.anchoredPosition, radius);
+            stick.anchoredPosition = Vector2.ClampMagnitude(stick.anchoredPosition, moveRange);
 
             UpdateAxisValue();
 

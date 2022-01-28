@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Zoca.Handlers
+namespace Zoca.VirtualInputSystem.Handlers
 {
     /// <summary>
     /// Represents an abstract virtual input handler.
