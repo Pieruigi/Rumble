@@ -1,0 +1,247 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252"/>
+	<title></title>
+	<meta name="generator" content="Neat Office 6.2.8.2 (Windows)"/>
+	<meta name="created" content="2022-01-29T22:33:59.326000000"/>
+	<meta name="changed" content="2022-01-30T00:39:04.228000000"/>
+	<style type="text/css">
+		@page { size: 21cm 29.7cm; margin: 2cm }
+		p { margin-bottom: 0.25cm; line-height: 115%; background: transparent }
+		h1 { margin-bottom: 0.21cm; background: transparent; page-break-after: avoid }
+		h1.western { font-family: "Liberation Sans", sans-serif; font-size: 18pt; font-weight: bold }
+		h1.cjk { font-family: "Microsoft YaHei"; font-size: 18pt; font-weight: bold }
+		h1.ctl { font-family: "Arial"; font-size: 18pt; font-weight: bold }
+		h2 { margin-top: 0.35cm; margin-bottom: 0.21cm; background: transparent; page-break-after: avoid }
+		h2.western { font-family: "Liberation Sans", sans-serif; font-size: 16pt; font-weight: bold }
+		h2.cjk { font-family: "Microsoft YaHei"; font-size: 16pt; font-weight: bold }
+		h2.ctl { font-family: "Arial"; font-size: 16pt; font-weight: bold }
+		h3 { margin-top: 0.25cm; margin-bottom: 0.21cm; background: transparent; page-break-after: avoid }
+		h3.western { font-family: "Liberation Sans", sans-serif; font-size: 14pt; font-weight: bold }
+		h3.cjk { font-family: "Microsoft YaHei"; font-size: 14pt; font-weight: bold }
+		h3.ctl { font-family: "Arial"; font-size: 14pt; font-weight: bold }
+		a:link { color: #000080; so-language: zxx; text-decoration: underline }
+		a:visited { color: #800000; so-language: zxx; text-decoration: underline }
+	</style>
+</head>
+<body lang="it-IT" link="#000080" vlink="#800000" dir="ltr"><p align="center" style="margin-top: 0.42cm; margin-bottom: 0.21cm; line-height: 100%; page-break-after: avoid">
+<font face="Liberation Sans, sans-serif"><font size="6" style="font-size: 28pt"><b>Mobile
+Input System 1.0.0</b></font></font></p>
+<p><br/>
+<br/>
+
+</p>
+<p>First of all we want to thank you for your purchase.</p>
+<p>For any question or suggestion feel free to write to
+<a href="mailto:pierluigi.zomparelli@gmail.com">pierluigi.zomparelli@gmail.com</a></p>
+<p>Our links here <a href="https://instabio.cc/Zocalight" target="_blank">Instabio</a>.</p>
+<p>Lets start.</p>
+<h1 class="western">Features</h1>
+<p>The MIS provides you with the most common input controls for your
+mobile game:</p>
+<ol>
+	<li><p>Virtual Joystick</p>
+	<li><p>Virtual Button</p>
+	<li><p> Tap</p>
+	<li><p>Swipe.</p>
+</ol>
+<p><br/>
+<br/>
+
+</p>
+<p>In the following section you will be explained how to use each of
+them.</p>
+<p><br/>
+<br/>
+
+</p>
+<h2 class="western">Virtual Joystick</h2>
+<p>The virtual joystick alown you to simply simulate gamepad analogic
+axis.</p>
+<p>Open the JoystickAndButtonScene to see an example.</p>
+<p>Lets see how to set up step by step:</p>
+<ol>
+	<li><p>Create a new scene or open an existing one</p>
+	<li><p>Add a new canvas ( you can use also an existing one )</p>
+	<li><p>Go to the Assets/VirtualInputSystem/Prefabs/InputUI folder 
+	</p>
+	<li><p>Drag and drop the VirtualJoystick prefab into the canvas 
+	</p>
+</ol>
+<p><br/>
+<br/>
+
+</p>
+<p>Now check the Joystick script in the prefab inspector, you will
+see the following parameters:</p>
+<ul>
+	<li><p>HorizontalAxis: the action you want to map to the horizontal
+	axis ( for example move or look left/right, or whaterver else you
+	want to do )</p>
+	<li><p>VerticalAxis: the same as the horizontal axis ( for example
+	move forth and back )</p>
+	<li><p>Stick: the analogic stick ( the child object )</p>
+	<li><p>MoveRange: the maximum distance you want the stick to be
+	moved ( normally it will be set according to the width and height in
+	the RectTransform when you resize the joystick )</p>
+	<li><p>ResetTime: how long it will take the stick to get back in the
+	rest position; if you set zero the stick will snap in one single
+	frame</p>
+</ul>
+<p>If you want for example to add a Joystick to move your player name
+the axis &ldquo;Horizontal&rdquo; and &ldquo;Vertical&rdquo; and in
+your PlayerController script add the following code:</p>
+<p><br/>
+<br/>
+
+</p>
+<p><font size="2" style="font-size: 9pt">Vector2 moveInput = new
+Vector2(VirtualInput.GetAxis(&ldquo;Horizontal&rdquo;),
+VirtualInput.GetAxis(&ldquo;Vertical&rdquo;));</font></p>
+<p><font size="2" style="font-size: 9pt">MoveCharacter(moveInput); //
+Some method to move the character around</font></p>
+<p><br/>
+<br/>
+
+</p>
+<p><font size="3" style="font-size: 12pt">This should reminds you the
+Unity InputSystem:</font></p>
+<p><font size="3" style="font-size: 12pt">VirtualInput.GetAxis(&ldquo;AxisName&rdquo;)
+returns a float value between -1 and 1 depending on the stick
+position.</font></p>
+<p><font size="3" style="font-size: 12pt">There is also a
+GetAxisRaw(&ldquo;AxisName&rdquo;), which returns 0 if the stick rest
+in place, otherwise returns 1 or -1 depending whether the axis value
+is positive or negative.</font></p>
+<p><font size="3" style="font-size: 12pt">You can add as many virtual
+joysticks as you want: for example you want your character to move
+and look around you can add two joysticks, one to the left and the
+other to the right. Then call the left joystick axis &ldquo;Horizontal&rdquo;
+and &ldquo;Vertical&rdquo; while the right joystick axis
+&ldquo;LookHorizontal&rdquo; and &ldquo;LookVertical&rdquo;.</font></p>
+<p><font size="3" style="font-size: 12pt">Now in your
+PlayerController script you can call both
+VirtualInput.GetAxis(&ldquo;Horizontal&rdquo;) and
+VirtualInput.GetAxis(&ldquo;LookHorizontal&rdquo;) for example in
+order to move and look horizontal.</font></p>
+<p><br/>
+<br/>
+
+</p>
+<h2 class="western">Virtual Button</h2>
+<p>You can add many virtual buttons in your mobile game.</p>
+<p>Check the VirtualJoystickAndButton example in which the player can
+jump and glide.</p>
+<p>Lets step by step how to put a button into a new scene:</p>
+<ol>
+	<li><p>Create a new scene or open an existing one</p>
+	<li><p>Add a new canvas ( you can use also an existing one )</p>
+	<li><p>Go to the Assets/VirtualInputSystem/Prefabs/InputUI folder 
+	</p>
+	<li><p>Drag and drop the VirtualButton prefab into the canvas 
+	</p>
+</ol>
+<p>In the inspector you can see the Button script which only has one
+parameter to map the action.</p>
+<p>For example call the button &ldquo;Jump&rdquo; and in your
+PlayerController script add the following code:</p>
+<p><font size="2" style="font-size: 9pt">if(VirtualInput.GetButtonDown(&ldquo;Jump&rdquo;))</font></p>
+<p><font size="2" style="font-size: 9pt">{</font></p>
+<p><font size="2" style="font-size: 9pt">	PlayerJump(); // Some
+method to let the player jump</font></p>
+<p><font size="2" style="font-size: 9pt">}</font></p>
+<p><font size="2" style="font-size: 9pt">if(VirtualInput.GetButton(&ldquo;Jump&rdquo;))</font></p>
+<p><font size="2" style="font-size: 9pt">{</font></p>
+<p><font size="2" style="font-size: 9pt">	PlayerGlide(); // You know,
+you may want your player to glide and not to fall down</font></p>
+<p><font size="2" style="font-size: 9pt">}</font></p>
+<p><font size="2" style="font-size: 9pt">if(VirtualInput.GetButtonUp(&ldquo;Jump&rdquo;)){</font></p>
+<p><font size="2" style="font-size: 9pt">{</font></p>
+<p><font size="2" style="font-size: 9pt">	FallAndDie(); // Ok maybe
+you want to do something else here</font></p>
+<p><font size="2" style="font-size: 9pt">}</font></p>
+<p><br/>
+<br/>
+
+</p>
+<p><font size="3" style="font-size: 12pt">As for the normal input
+system you can call VirtualInput.GetButton(&ldquo;ButtonName&rdquo;)
+which returns true if the player holds the button down, othwerwise
+false</font></p>
+<p><font size="3" style="font-size: 12pt">VirtualInput.GetButtonDown(&ldquo;ButtonName&rdquo;)
+returns true as soon as the button is pressed and </font>
+</p>
+<p><font size="3" style="font-size: 12pt">VirtualInput.GetButtonUp(&ldquo;ButtonName&rdquo;)
+returns true as soon as the button is released ( otherwise they both
+return false ).</font></p>
+<p><font size="3" style="font-size: 12pt">You can add as many buttons
+as you want, for example to &ldquo;Jump&rdquo; or &ldquo;Shoot&rdquo;
+or &ldquo;Interact&rdquo;.</font></p>
+<p><br/>
+<br/>
+
+</p>
+<h2 class="western">Tap and swipe</h2>
+<p>Open the TapAndSwipeScene to see an example.</p>
+<p>Lets see step by step:</p>
+<ol start="5">
+	<li><p>Create a new scene or open an existing one</p>
+	<li><p>Add a new canvas ( you can use also an existing one )</p>
+	<li><p>Go to the Assets/VirtualInputSystem/Prefabs/InputUI folder 
+	</p>
+	<li><p>Drag and drop the TaperSwiper prefab into the canvas 
+	</p>
+</ol>
+<p>Check the inspector, you can see two scripts on the prefab: Taper
+and Swiper.</p>
+<p>They can be enabled or disabled: for example if you just want to
+tap you can disable the Swiper script ( or even delete it ).</p>
+<p>Taper has only one parameter, TapTime, which defines for how long
+you can hold down your finger on the screen before the tap fail: for
+example by setting TapTime=1 tap fails if you hold your finger for
+more than one second.</p>
+<p>In your PlayerController call VirtualInput.GetTap(out TapData) and
+VirtualInput.GetSwipe(out SwipeData) to check for tap and swipe.</p>
+<p>VirtualInput.GetTap(out TapData) returns true when player taps the
+screen, otherwise false; if true you can read the position and the
+duration of the tap in the TapData structure.</p>
+<p>VirtualInput.GetSwipe(out SwipeData) returns true when player
+swipes the screen, otherwise false; if true you can the position and
+the delta ( position &ndash; delta = previsousFramePosition ) in the
+SwipeData structure.</p>
+<p><br/>
+<br/>
+
+</p>
+<p>For any question or suggestion feel free to write to
+<a href="mailto:pierluigi.zomparelli@gmail.com">pierluigi.zomparelli@gmail.com</a></p>
+<p><font size="3" style="font-size: 12pt">Our links here <a href="https://instabio.cc/Zocalight" target="_blank">Instabio</a>.</font></p>
+<p><br/>
+<br/>
+
+</p>
+<h2 class="western">Change Log</h2>
+<h3 class="western">1.0.0</h3>
+<ul>
+	<li><p>Intial release</p>
+</ul>
+<p><br/>
+<br/>
+
+</p>
+<p>	</p>
+<p><br/>
+<br/>
+
+</p>
+<p><br/>
+<br/>
+
+</p>
+<p><br/>
+<br/>
+
+</p>
+</body>
+</html>
