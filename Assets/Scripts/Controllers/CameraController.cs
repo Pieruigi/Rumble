@@ -43,6 +43,12 @@ namespace Zoca.Controllers
 
             // Move to the target position
             transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime);
+
+
+            // Rotation
+            Vector3 eulers = transform.eulerAngles;
+            eulers.x = pitch;
+            transform.eulerAngles = eulers;
         }
 
         Vector3 GetTargetPosition()

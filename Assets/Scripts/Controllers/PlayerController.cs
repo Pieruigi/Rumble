@@ -8,11 +8,11 @@ namespace Zoca.Controllers
     public class PlayerController : MonoBehaviour
     {
         [SerializeField]
-        float maxTorqueSpeed = 10;
+        float maxTorque = 10;
         
-        [SerializeField]
-        float torqueAcceleration;
-
+      
+        //[SerializeField]
+        //float maxForce = 10;
 
 
         Rigidbody rb;
@@ -20,12 +20,15 @@ namespace Zoca.Controllers
 
         Vector3 targetTorque;
         Vector3 torque;
-
+        SphereCollider coll;
+        bool freezeY = false;
         
 
         private void Awake()
         {
             rb = GetComponent<Rigidbody>();
+            rb.maxAngularVelocity = Mathf.Infinity;
+            coll = GetComponent<SphereCollider>();
         }
 
         private void Start()
@@ -35,23 +38,53 @@ namespace Zoca.Controllers
 
         private void Update()
         {
+           
+
 #if UNITY_EDITOR
             moveInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 #endif
             moveInput = new Vector2(VirtualInput.GetAxis("Horizontal"), VirtualInput.GetAxis("Vertical"));
 
-            // Calculate torque
-            Vector2 targetTorqueDir = moveInput.normalized;
-            float targetTorqueSpeed = moveInput.magnitude * maxTorqueSpeed;
-            targetTorque = new Vector3(targetTorqueDir.y, 0, -targetTorqueDir.x) * targetTorqueSpeed;
+            
 
         }
 
         private void FixedUpdate()
         {
+            if(freezeY)
+                rb.constraints = RigidbodyConstraints.FreezePositionY;
+            else
+                rb.constraints = RigidbodyConstraints.None;
 
-            torque = Vector3.MoveTowards(torque, targetTorque, torqueAcceleration * Time.fixedDeltaTime);
-            rb.AddTorque(torque, ForceMode.Force);
+            Vector3 t = maxTorque * new Vector3(moveInput.y, 0, -moveInput.x);
+            //Debug.Log("Torque:" + t);
+            rb.AddTorque(t, ForceMode.Force);
+            //Debug.Log("Rb.AngularVelocity:" + rb.angularVelocity);
+            //rb.AddForce(maxForce * new Vector3(moveInput.x, 0, moveInput.y), ForceMode.Force);
+            CheckGrounded();
+        }
+
+        void CheckGrounded()
+        {
+            float radius = coll.radius+0.01f;
+            Ray ray = new Ray(rb.position, Vector3.down);
+            coll.enabled = false;
+            RaycastHit info;
+            if(Physics.Raycast(ray, out info, radius))
+            {
+                // Reset vertical position
+                rb.MovePosition(new Vector3(rb.position.x, info.point.y + coll.radius, rb.position.z));
+
+                // Since it seems that setting and then freezing position in the same frame avoids the ball 
+                // to move, we set the vertical constraints to the next FixedUpdate
+                freezeY = true;
+            }
+            else
+            {
+                freezeY = false;
+            }
+            coll.enabled = true;
+
         }
 
 #if old
