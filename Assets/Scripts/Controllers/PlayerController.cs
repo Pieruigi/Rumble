@@ -22,13 +22,15 @@ namespace Zoca.Controllers
         Vector3 torque;
         SphereCollider coll;
         bool freezeY = false;
-        
+        bool constraintsDisabled;
 
         private void Awake()
         {
             rb = GetComponent<Rigidbody>();
             rb.maxAngularVelocity = Mathf.Infinity;
             coll = GetComponent<SphereCollider>();
+
+            
         }
 
         private void Start()
@@ -51,16 +53,19 @@ namespace Zoca.Controllers
 
         private void FixedUpdate()
         {
-            if(freezeY)
-                rb.constraints = RigidbodyConstraints.FreezePositionY;
-            else
-                rb.constraints = RigidbodyConstraints.None;
+            
+                //if (freezeY && !constraintsDisabled)
+                //    rb.constraints = RigidbodyConstraints.FreezePositionY;
+                //else
+                //    rb.constraints = RigidbodyConstraints.None;
+            
 
             Vector3 t = maxTorque * new Vector3(moveInput.y, 0, -moveInput.x);
             //Debug.Log("Torque:" + t);
             rb.AddTorque(t, ForceMode.Force);
             //Debug.Log("Rb.AngularVelocity:" + rb.angularVelocity);
-            //rb.AddForce(maxForce * new Vector3(moveInput.x, 0, moveInput.y), ForceMode.Force);
+            //rb.AddForce(10 * new Vector3(moveInput.x, 0, moveInput.y), ForceMode.Force);
+            //rb.MovePosition (rb.position + 20*Vector3.forward * Time.fixedDeltaTime);
             CheckGrounded();
         }
 
@@ -68,9 +73,10 @@ namespace Zoca.Controllers
         {
             float radius = coll.radius+0.01f;
             Ray ray = new Ray(rb.position, Vector3.down);
-            coll.enabled = false;
+            //coll.enabled = false;
             RaycastHit info;
-            if(Physics.Raycast(ray, out info, radius))
+            int mask = LayerMask.GetMask(new string[] { "Player" });
+            if (Physics.Raycast(ray, out info, radius, ~mask))
             {
                 // Reset vertical position
                 rb.MovePosition(new Vector3(rb.position.x, info.point.y + coll.radius, rb.position.z));
@@ -83,10 +89,15 @@ namespace Zoca.Controllers
             {
                 freezeY = false;
             }
-            coll.enabled = true;
+            //coll.enabled = true;
 
         }
 
+
+        public void EnableConstraints(bool value)
+        {
+            constraintsDisabled = !value;
+        }
 #if old
         #region private fields
         [SerializeField]

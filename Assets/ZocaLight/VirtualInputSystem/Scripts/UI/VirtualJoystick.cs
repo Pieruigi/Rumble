@@ -73,6 +73,12 @@ namespace Zoca.VirtualInputSystem.UI
             }
         }
 
+        private void OnDestroy()
+        {
+            VirtualInput.UnregisterHandler(horizontalHandler);
+            VirtualInput.UnregisterHandler(verticalHandler);
+        }
+
         void UpdateAxisValue()
         {
             // Set value
