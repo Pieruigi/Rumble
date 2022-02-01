@@ -26,6 +26,7 @@ namespace Zoca.VirtualInputSystem.UI
         {
             // Create handler
             handler = new TapHandler();
+            VirtualInput.RegisterHandler(handler);
         }
 
         // Start is called before the first frame update
@@ -50,6 +51,12 @@ namespace Zoca.VirtualInputSystem.UI
             }
 
            
+        }
+
+        void OnDestroy()
+        {
+            // Unregister handler
+            VirtualInput.UnregisterHandler(handler);
         }
 
         IEnumerator Reset()

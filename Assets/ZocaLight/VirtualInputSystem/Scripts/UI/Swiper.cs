@@ -17,6 +17,7 @@ namespace Zoca.VirtualInputSystem.UI
         private void Awake()
         {
             handler = new SwipeHandler();
+            VirtualInput.RegisterHandler(handler);
         }
 
         // Start is called before the first frame update
@@ -32,6 +33,11 @@ namespace Zoca.VirtualInputSystem.UI
             {
                 handler.Update(position);
             }
+        }
+
+        void OnDestroy()
+        {
+            VirtualInput.UnregisterHandler(handler);
         }
 
         public void OnDrag(PointerEventData eventData)

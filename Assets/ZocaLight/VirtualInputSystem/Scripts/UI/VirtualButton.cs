@@ -26,10 +26,13 @@ namespace Zoca.VirtualInputSystem.UI
         ButtonHandler handler;
         #endregion
 
+        #region private methods
         private void Awake()
         {
+            // Register the new handler
             handler = new ButtonHandler(buttonName);
-            
+            VirtualInput.RegisterHandler(handler);
+
             // Reset the handle 
             handler.Reset();
         }
@@ -46,6 +49,10 @@ namespace Zoca.VirtualInputSystem.UI
             
         }
 
+        void OnDestroy()
+        {
+            VirtualInput.UnregisterHandler(handler);
+        }
        
         IEnumerator CheckTheEndOfFrame(bool checkIsDown)
         {
@@ -63,7 +70,9 @@ namespace Zoca.VirtualInputSystem.UI
             }
             
         }
+        #endregion
 
+        #region pointer events
         public void OnPointerDown(PointerEventData eventData)
         {
            
@@ -82,6 +91,7 @@ namespace Zoca.VirtualInputSystem.UI
 
             OnButtonUp?.Invoke(this);
         }
+        #endregion
     }
 
 }

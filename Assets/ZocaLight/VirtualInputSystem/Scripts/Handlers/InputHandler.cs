@@ -9,6 +9,9 @@ namespace Zoca.VirtualInputSystem.Handlers
     /// </summary>
     public abstract class InputHandler
     {
+        /// <summary>
+        /// The name of the handler.
+        /// </summary>
         public string Name
         {
             get { return _name; }
@@ -29,11 +32,7 @@ namespace Zoca.VirtualInputSystem.Handlers
             _name = name;
             Debug.Log("Creating new virtual input handler:" + _name);
 
-            // Try register handle
-            VirtualInput.RegisterHandler(this);
-
-         
-           
+            
             
         }
 

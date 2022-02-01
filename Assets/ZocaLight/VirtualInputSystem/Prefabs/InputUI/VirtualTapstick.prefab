@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 8192060668857118473}
   - component: {fileID: 6445174674877234314}
   m_Layer: 5
-  m_Name: VirtualJoystick
+  m_Name: VirtualTapstick
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -181,8 +181,9 @@ MonoBehaviour:
   horizontalAxisName: Horizontal
   verticalAxisName: Vertical
   stick: {fileID: 3641248790675145965}
-  moveRange: 160
-  resetTime: 1
+  moveRange: 200
+  resetTime: 0
+  tapMode: 1
 --- !u!1 &6903909536230875958
 GameObject:
   m_ObjectHideFlags: 0
@@ -218,7 +219,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 140, y: 140}
+  m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3732959701192398541
 CanvasRenderer:

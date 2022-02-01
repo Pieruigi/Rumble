@@ -27,14 +27,16 @@ namespace Zoca.VirtualInputSystem.UI
         [SerializeField]
         float resetTime = 0f; // The time it will take to reset ( 0 means immediate )
 
+        [SerializeField]
+        bool tapMode = false;
+
         // The handlers
         AxisHandler horizontalHandler;
         AxisHandler verticalHandler;
 
         
         bool isDown = false;
-       
-
+        Vector3 stickRestPosition;
         #endregion
 
         #region private methods
@@ -43,14 +45,19 @@ namespace Zoca.VirtualInputSystem.UI
             // Create handlers
             horizontalHandler = new AxisHandler(horizontalAxisName);
             verticalHandler = new AxisHandler(verticalAxisName);
-   
+            VirtualInput.RegisterHandler(horizontalHandler);
+            VirtualInput.RegisterHandler(verticalHandler);
 
+            
         }
 
         // Start is called before the first frame update
         void Start()
         {
-
+            // We get the rest position in the Start() rather than the Awake() method to give the engine
+            // the time to scale the resolution according to the canvas settings.
+            stickRestPosition = stick.position;
+            Debug.Log("StickRestPosition.Position:" + stickRestPosition);
         }
 
         // Update is called once per frame
@@ -92,8 +99,10 @@ namespace Zoca.VirtualInputSystem.UI
         #region event handlers
         public void OnDrag(PointerEventData eventData)
         {
-           
-            stick.anchoredPosition += eventData.delta;
+
+            //stick.anchoredPosition += eventData.delta;
+            //stick.anchoredPosition = Vector2.ClampMagnitude(stick.anchoredPosition, moveRange);
+            stick.position = eventData.position;
             stick.anchoredPosition = Vector2.ClampMagnitude(stick.anchoredPosition, moveRange);
 
             UpdateAxisValue();
@@ -103,6 +112,16 @@ namespace Zoca.VirtualInputSystem.UI
         public void OnPointerDown(PointerEventData eventData)
         {
             isDown = true;
+
+            if(tapMode)
+            {
+                Debug.Log("EventData.Position:" + eventData.position);
+
+                stick.position = eventData.position;// - new Vector2(stickRestPosition.x, stickRestPosition.y);
+                //stick.anchoredPosition = Vector2.ClampMagnitude(stick.anchoredPosition, moveRange);
+
+                UpdateAxisValue();
+            }
         }
 
         public void OnPointerUp(PointerEventData eventData)
