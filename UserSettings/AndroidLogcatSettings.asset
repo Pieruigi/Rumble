@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "57U7N17927038338",
         "name": "com.DefaultCompany.Rumble",
-        "processId": 10679,
+        "processId": 16777,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -84,6 +84,18 @@
             "deviceId": "57U7N17927038338",
             "name": "com.DefaultCompany.Rumble",
             "processId": 10679,
+            "exited": false
+        },
+        {
+            "deviceId": "57U7N17927038338",
+            "name": "com.DefaultCompany.Rumble",
+            "processId": 12668,
+            "exited": false
+        },
+        {
+            "deviceId": "57U7N17927038338",
+            "name": "com.DefaultCompany.Rumble",
+            "processId": 16777,
             "exited": false
         }
     ],
