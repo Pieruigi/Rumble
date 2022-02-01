@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using Zoca.VirtualInputSystem.Handlers;
 
@@ -11,6 +12,11 @@ namespace Zoca.VirtualInputSystem.UI
     /// </summary>
     public class VirtualJoystick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler
     {
+        #region unity events
+        public UnityAction<VirtualJoystick> OnPressed;
+        public UnityAction<VirtualJoystick> OnReleased;
+        #endregion
+
         #region private fields
         [SerializeField]
         string horizontalAxisName; // Name of the horizontal axis
@@ -122,11 +128,15 @@ namespace Zoca.VirtualInputSystem.UI
 
                 UpdateAxisValue();
             }
+
+            OnPressed?.Invoke(this);
         }
 
         public void OnPointerUp(PointerEventData eventData)
         {
             isDown = false;
+
+            OnReleased?.Invoke(this);
         }
 
         #endregion
