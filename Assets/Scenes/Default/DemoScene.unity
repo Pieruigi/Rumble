@@ -285,7 +285,7 @@ PrefabInstance:
     - target: {fileID: 5835797742316347347, guid: 3c871620cb1c94f40bdafa95a5594e47,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.9
+      value: 1.7
       objectReference: {fileID: 0}
     - target: {fileID: 5835797742316347347, guid: 3c871620cb1c94f40bdafa95a5594e47,
         type: 3}
@@ -295,7 +295,7 @@ PrefabInstance:
     - target: {fileID: 5835797742316347347, guid: 3c871620cb1c94f40bdafa95a5594e47,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 79.7
+      value: 80.04
       objectReference: {fileID: 0}
     - target: {fileID: 5835797742316347347, guid: 3c871620cb1c94f40bdafa95a5594e47,
         type: 3}
@@ -1068,7 +1068,7 @@ PrefabInstance:
     - target: {fileID: 5835797742316347347, guid: 3c871620cb1c94f40bdafa95a5594e47,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.13
+      value: 8.56
       objectReference: {fileID: 0}
     - target: {fileID: 5835797742316347347, guid: 3c871620cb1c94f40bdafa95a5594e47,
         type: 3}
@@ -1078,7 +1078,7 @@ PrefabInstance:
     - target: {fileID: 5835797742316347347, guid: 3c871620cb1c94f40bdafa95a5594e47,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 53.05
+      value: 56.56
       objectReference: {fileID: 0}
     - target: {fileID: 5835797742316347347, guid: 3c871620cb1c94f40bdafa95a5594e47,
         type: 3}
@@ -1142,7 +1142,7 @@ PrefabInstance:
     - target: {fileID: 5835797742316347347, guid: 3c871620cb1c94f40bdafa95a5594e47,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.54
+      value: 3.65
       objectReference: {fileID: 0}
     - target: {fileID: 5835797742316347347, guid: 3c871620cb1c94f40bdafa95a5594e47,
         type: 3}
@@ -1152,7 +1152,7 @@ PrefabInstance:
     - target: {fileID: 5835797742316347347, guid: 3c871620cb1c94f40bdafa95a5594e47,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 36.05
+      value: 37.85
       objectReference: {fileID: 0}
     - target: {fileID: 5835797742316347347, guid: 3c871620cb1c94f40bdafa95a5594e47,
         type: 3}
