@@ -7,6 +7,8 @@ namespace Zoca.Controllers
 {
     public class PlayerController : MonoBehaviour
     {
+        
+
         [SerializeField]
         float maxTorque = 10;
         
