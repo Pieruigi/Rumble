@@ -12,7 +12,7 @@ namespace Zoca.UI
         [SerializeField]
         TMP_Text timerText;
 
-        string timerFormat = "{0:ss.fff}";
+        string timerFormat = "{0:mm:ss.fff}";
         DateTime startTime;
 
         private void Awake()
